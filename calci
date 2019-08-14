@@ -1,0 +1,151 @@
+package Calculator;
+import java.awt.event.ActionListener;
+import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowAdapter;
+import javax.media.Player;
+import javax.media.Manager;
+import java.io.File;
+
+public class Calculator extends JFrame  implements ActionListener
+{
+
+
+static JFrame jF;
+static JTextField  jTF;
+{addWindowListener(new WindowAdapter()
+{public void windowClosing(WindowEvent d)
+{System.exit(0);}});}
+String s0,s1,s2;
+Calculator()
+{s0=s1=s2=" ";}
+public static void main(String...ar) throws  Exception
+{
+Player play=Manager.createRealizedPlayer(new File("C:\\Users\\HP\\Documents\\src\\calcul.wav").toURI().toURL());
+play.start();
+System.out.println("");
+play.stop();
+
+jF=new JFrame("Calculator");
+//try-catch+default const
+Calculator c=new Calculator();
+jTF=new JTextField(16);
+JButton j0,j1,j2,j3,j4,j5,j6,j7,j8,j9,ja,js,jd,jm,je,jc;
+j0=new JButton("0");
+j1=new JButton("1");
+j2=new JButton("2");
+j3=new JButton("3");
+j4=new JButton("4");
+j5=new JButton("5");
+j6=new JButton("6");
+j7=new JButton("7");
+j8=new JButton("8");
+j9=new JButton("9");
+je=new JButton("=");
+ja=new JButton("+");
+js=new JButton("-");
+jd=new JButton("/");
+jm=new JButton("*");
+jc=new JButton("c");
+
+JPanel p=new JPanel();
+j0.addActionListener(c);
+j1.addActionListener(c);
+j2.addActionListener(c);
+j3.addActionListener(c);
+j4.addActionListener(c);
+j5.addActionListener(c);
+j6.addActionListener(c);
+j7.addActionListener(c);
+j8.addActionListener(c);
+j9.addActionListener(c);
+ja.addActionListener(c);
+jd.addActionListener(c);
+js.addActionListener(c);
+jm.addActionListener(c);
+je.addActionListener(c);
+jc.addActionListener(c);
+
+
+p.add(jTF);
+p.add(ja);
+p.add(js);
+p.add(jd);
+p.add(jm);
+p.add(j0);
+p.add(j1);
+p.add(j2);
+
+p.add(j3);
+p.add(j4);
+p.add(j5);
+p.add(j6);
+p.add(j7);
+p.add(j8);
+p.add(j9);
+p.add(je);
+
+p.add(jc);
+p.setBackground(Color.red);
+jF.add(p);
+jF.setSize(250,250);
+jF.show();
+}
+public void actionPerformed(ActionEvent e)
+{
+String s=e.getActionCommand();
+if(s.charAt(0)>='0' && s.charAt(0)<='9')
+{if(!s1.equals(" "))
+s2=s2+s;
+else
+s0=s0+s;
+jTF.setText(s0+s1+s2);}
+
+else if(s.charAt(0)=='c')
+{
+s0=s1=s2=" ";
+jTF.setText(s0+s1+s2);}
+else if(s.charAt(0)=='=')
+{
+double re=0;
+if(s1.equals("+"))
+re=(Double.parseDouble(s0)+Double.parseDouble(s2));
+else if(s1.equals("-"))
+re=(Double.parseDouble(s0)-Double.parseDouble(s2));
+else if(s1.equals("*"))
+re=(Double.parseDouble(s0)*Double.parseDouble(s2));
+else if(s1.equals("/"))
+re=(Double.parseDouble(s0)/Double.parseDouble(s2));
+jTF.setText(s0 + s1 + s2 + "="+ re);
+s0=Double.toString(re);
+s1=s2=" ";
+}
+else
+{
+if(s1.equals(" ")||s2.equals(" "))
+s1=s;
+else
+{double re=0;
+if(s1.equals("+"))
+re=(Double.parseDouble(s0)+Double.parseDouble(s2));
+else if(s1.equals("-"))
+re=(Double.parseDouble(s0)-Double.parseDouble(s2));
+else if(s1.equals("*"))
+re=(Double.parseDouble(s0)*Double.parseDouble(s2));
+else if (s1.equals("/"))
+re=(Double.parseDouble(s0)/Double.parseDouble(s2));
+s0=Double.toString(re);
+s1=s;
+s2=" ";
+}}
+jTF.setText(s0+s1+s2);}
+
+
+
+
+}
